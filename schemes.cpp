@@ -19,37 +19,37 @@ string nrz_l(string data) // nonreturn to zero level
 string nrz_i(string data) //nonreturn to zero inverted
 {
 	string output;
-	string lastbit;
+	string lastbit; //save the last bit output
 	for(int i =0; i < data.length();i++)
 	{
-		if(i == 0){
-			if(data[i] == '1')
+		if(i == 0){ //starting bit
+			if(data[i] == '1')//let first bit be positive for input "1"
 			{
 				output += "|+V";
 				lastbit = "|+V";
 			}
-			else if(data[i] == '0')
+			else if(data[i] == '0')//negative for input "0"
 			{
 				output += "|-V";
 				lastbit = "|-V";
 			}
 		}
-		else
+		else//rest of bit signals
 		{
-			if(data[i] == '1')
+			if(data[i] == '1') // if input '1' then transition bit
 			{
-				if(lastbit == "|-V")
+				if(lastbit == "|-V")// low to high
 				{
 					output += "|+V";
 					lastbit= "|+V";
 				}
-				else
+				else if(lastbit == "|+V")//high to low
 				{
 					output += "|-V";
 					lastbit = "|-V";
 				}
 			}
-			else if(data[i] == '0')
+			else if(data[i] == '0')// else no transition
 			{
 				output += lastbit;
 			}
@@ -57,31 +57,31 @@ string nrz_i(string data) //nonreturn to zero inverted
 	}
 	return output + "|";
 }
-string b_ami(string data)
+string b_ami(string data) //Bipolar-AMI(alternate mark inversion)
 {
 	string output;
-	string last_onebit_transition;
+	string last_onebit_transition; //save the last "1" bit transition
 	for(int i =0; i < data.length();i++)
 	{
 		
-		if(i == 0)
+		if(i == 0)//starting bit
 		{
-			if(data[i] == '1')
+			if(data[i] == '1') //starting bit could be either positive or negative(+V , -V )
 			{
-				output += "|-V";    //starting bit could be either positive or negative(+V , -V )
+				output += "|-V";   
 				last_onebit_transition = "|-V";
 			}
-			else if(data[i] == '0')
+			else if(data[i] == '0')//if starting bit is zero, that is zero voltage
 			{
-				output += "|0V"; //if starting bit is zero, that is zero voltage
+				output += "|0V"; //no line signal
 				
 			}
 		}
-		else
+		else//rest of bit signals
 		{
-			if(data[i] == '1')
+			if(data[i] == '1') //if input "1" then transition according to last "1" input
 			{
-				if(last_onebit_transition == "|+V")
+				if(last_onebit_transition == "|+V") //if last "1" bit was positive voltage then flip polarity
 				{
 					output += "|-V";
 					last_onebit_transition = "|-V";
@@ -92,7 +92,7 @@ string b_ami(string data)
 					last_onebit_transition = "|+V";
 				}
 			}
-			else if(data[i] == '0')
+			else if(data[i] == '0')// if zero then zero voltage
 			{
 				output += "|0V";
 			}
