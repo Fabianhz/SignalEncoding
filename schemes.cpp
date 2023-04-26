@@ -100,54 +100,54 @@ string b_ami(string data)
 	}
 	return output + "|";
 }
-string manchester(string data)
+string manchester(string data) //manchester encoding technique
 {
 	string output;
 		for (int i = 0; i < data.length(); i++)
 		{
-			if (data[i] == '1') {
+			if (data[i] == '1') { //if bit is equal to 1, then output -V +V (low to high)
 				output += "|-V +V";
 			}
-			else if (data[i] == '0') {
+			else if (data[i] == '0') { //if bit is equal to 0, then output +V -V (high to low)
 					output += "|+V -V";
 			}
 		}
 	return output + "|";
 }
-string d_Manchester(string data)
+string d_Manchester(string data) //differential manchester technique
 {
 
 	string output;
-	string lastbit;
+	string lastbit; //save the last bit output
     for (int i = 0; i < data.length(); i++)
     {
-        if (i == 0) {
-            if (data[i] == '1') {
+        if (i == 0) { //first bit
+            if (data[i] == '1') { //if first bit is equal to 1, then output +V -V (high to low) and save to lastbit
                 output += "|+V -V";
                 lastbit = "|+V -V";
             }
-            else if (data[i] == '0') {
+            else if (data[i] == '0') { //if first bit is equal to 0, then output -V +V (low to high) and save to lastbit
                 output += "|-V +V";
                 lastbit = "|-V +V";
             }
         }
-        else {
+        else { //rest of bits
 
-            if (data[i] == '1') {
-                if (lastbit == "|+V -V") {
+            if (data[i] == '1') { 
+                if (lastbit == "|+V -V") { //if bit is equal to 1 and if lastbit is equal to +V -V (high to low), then output and save -V +V (low to high) 
                     output += "|-V +V";
                     lastbit = "|-V +V";
                 }
-                else if (lastbit == "|-V +V") {
+                else if (lastbit == "|-V +V") { //if bit is equal to 1 and if lastbit is equal to -V +V (low to high), then output and save +V -V (high to low)
                     output += "|+V -V";
                     lastbit = "|+V -V";
                 }
             }
-            else if (data[i] == '0') {
-                if (lastbit == "|-V +V") {
+            else if (data[i] == '0') { 
+                if (lastbit == "|-V +V") { //if bit is equal to 0 and if lastbit is equal to -V +V (low to high), then output -V +V (low to high)
                     output += "|-V +V";
                 }
-                else if (lastbit == "|+V -V") {
+                else if (lastbit == "|+V -V") { //if bit is equal to 0 and if lastbit is equal to +V -V (high to low), then output +V -V (high to low)
                     output += "|+V -V";
                 }
             }
