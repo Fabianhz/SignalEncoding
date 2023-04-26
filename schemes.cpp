@@ -5,7 +5,7 @@ string nrz_l(string data) // nonreturn to zero level
 	string output;
 	for(int i =0; i < data.length();i++)
 	{	//either positive or negative can be set for "1" input as long as "0" input has opposite polarity
-		if(data[i] == '1')
+		if(data[i] == '1') 
 		{
 			output += "|-V";
 		}
@@ -100,7 +100,7 @@ string b_ami(string data) //Bipolar-AMI(alternate mark inversion)
 	}
 	return output + "|";
 }
-string manchester(string data) //manchester encoding technique
+string manchester(string data) //manchester encoding scheme
 {
 	string output;
 		for (int i = 0; i < data.length(); i++)
@@ -114,7 +114,7 @@ string manchester(string data) //manchester encoding technique
 		}
 	return output + "|";
 }
-string d_Manchester(string data) //differential manchester technique
+string d_Manchester(string data) //differential manchester scheme
 {
 
 	string output;
