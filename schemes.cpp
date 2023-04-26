@@ -19,15 +19,40 @@ string nrz_l(string data)
 string nrz_i(string data)
 {
 	string output;
+	string last_it;
 	for(int i =0; i < data.length();i++)
 	{
-		if(data[i] == '1')
-		{
-			output += "";
+		if(i == 0){
+			if(data[i] == '1')
+			{
+				output += "|+V|";
+				last_it = "|+V|";
+			}
+			else if(data[i] == '0')
+			{
+				output += "|-V|";
+				last_it = "|-V|";
+			}
 		}
-		else if(data[i] == '0')
+		else
 		{
-			output += "";
+			if(data[i] == '1')
+			{
+				if(last_it == "|-V|")
+				{
+					output += "|+V|";
+					last_it = "|+V|";
+				}
+				else
+				{
+					output += "|-V|";
+					last_it = "|-V|";
+				}
+			}
+			else if(data[i] == '0')
+			{
+				output += last_it;
+			}
 		}
 	}
 	return output;
