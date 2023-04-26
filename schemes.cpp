@@ -1,61 +1,61 @@
 #include "schemes.h"
 
-string nrz_l(string data)
+string nrz_l(string data) // nonreturn to zero level
 {
 	string output;
 	for(int i =0; i < data.length();i++)
-	{
+	{	//either positive or negative can be set for "1" input as long as "0" input has opposite polarity
 		if(data[i] == '1')
 		{
-			output += "|-V|";
+			output += "|-V";
 		}
 		else if(data[i] == '0')
 		{
-			output += "|+V|";
+			output += "|+V";
 		}
 	}
-	return output;
+	return output + "|";
 }
-string nrz_i(string data)
+string nrz_i(string data) //nonreturn to zero inverted
 {
 	string output;
-	string last_itr;
+	string lastbit;
 	for(int i =0; i < data.length();i++)
 	{
 		if(i == 0){
 			if(data[i] == '1')
 			{
-				output += "|+V|";
-				last_itr = "|+V|";
+				output += "|+V";
+				lastbit = "|+V";
 			}
 			else if(data[i] == '0')
 			{
-				output += "|-V|";
-				last_itr = "|-V|";
+				output += "|-V";
+				lastbit = "|-V";
 			}
 		}
 		else
 		{
 			if(data[i] == '1')
 			{
-				if(last_itr == "|-V|")
+				if(lastbit == "|-V")
 				{
-					output += "|+V|";
-					last_itr = "|+V|";
+					output += "|+V";
+					lastbit= "|+V";
 				}
 				else
 				{
-					output += "|-V|";
-					last_itr = "|-V|";
+					output += "|-V";
+					lastbit = "|-V";
 				}
 			}
 			else if(data[i] == '0')
 			{
-				output += last_itr;
+				output += lastbit;
 			}
 		}
 	}
-	return output;
+	return output + "|";
 }
 string b_ami(string data)
 {
@@ -68,12 +68,12 @@ string b_ami(string data)
 		{
 			if(data[i] == '1')
 			{
-				output += "|-V|";    //starting bit could be either positive or negative(+V , -V )
-				last_onebit_transition = "|-V|";
+				output += "|-V";    //starting bit could be either positive or negative(+V , -V )
+				last_onebit_transition = "|-V";
 			}
 			else if(data[i] == '0')
 			{
-				output += "|0V|"; //if starting bit is zero, that is zero voltage
+				output += "|0V"; //if starting bit is zero, that is zero voltage
 				
 			}
 		}
@@ -81,24 +81,24 @@ string b_ami(string data)
 		{
 			if(data[i] == '1')
 			{
-				if(last_onebit_transition == "|+V|")
+				if(last_onebit_transition == "|+V")
 				{
-					output += "|-V|";
-					last_onebit_transition = "|-V|";
+					output += "|-V";
+					last_onebit_transition = "|-V";
 				}
-				else if(last_onebit_transition == "|-V|")
+				else if(last_onebit_transition == "|-V")
 				{
-					output += "|+V|";
-					last_onebit_transition = "|+V|";
+					output += "|+V";
+					last_onebit_transition = "|+V";
 				}
 			}
 			else if(data[i] == '0')
 			{
-				output += "|0V|";
+				output += "|0V";
 			}
 		}
 	}
-	return output;
+	return output + "|";
 }
 string manchester(string data)
 {
@@ -106,18 +106,53 @@ string manchester(string data)
 		for (int i = 0; i < data.length(); i++)
 		{
 			if (data[i] == '1') {
-				output += "|-V +V|";
+				output += "|-V +V";
 			}
 			else if (data[i] == '0') {
-					output += "|+V -V|";
+					output += "|+V -V";
 			}
 		}
-	return output;
+	return output + "|";
 }
 string d_Manchester(string data)
 {
 
 	string output;
-	return output;
+	string lastbit;
+    for (int i = 0; i < data.length(); i++)
+    {
+        if (i == 0) {
+            if (data[i] == '1') {
+                output += "|+V -V";
+                lastbit = "|+V -V";
+            }
+            else if (data[i] == '0') {
+                output += "|-V +V";
+                lastbit = "|-V +V";
+            }
+        }
+        else {
+
+            if (data[i] == '1') {
+                if (lastbit == "|+V -V") {
+                    output += "|-V +V";
+                    lastbit = "|-V +V";
+                }
+                else if (lastbit == "|-V +V") {
+                    output += "|+V -V";
+                    lastbit = "|+V -V";
+                }
+            }
+            else if (data[i] == '0') {
+                if (lastbit == "|-V +V") {
+                    output += "|-V +V";
+                }
+                else if (lastbit == "|+V -V") {
+                    output += "|+V -V";
+                }
+            }
+        }
+    }
+    return output + "|";
 
 }
