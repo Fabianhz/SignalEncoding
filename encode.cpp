@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 			outfile << d_Manchester(data) << endl;
 			break;
 		default:
-			cout << "Incorrect code schemes" << endl;
+			cout << "Incorrect code scheme" << endl;
 			break;
 	
 	

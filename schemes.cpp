@@ -2,12 +2,34 @@
 
 string nrz_l(string data)
 {
-	string output= "nrz_l";
+	string output;
+	for(int i =0; i < data.length();i++)
+	{
+		if(data[i] == '1')
+		{
+			output += "|-V|";
+		}
+		else if(data[i] == '0')
+		{
+			output += "|+V|";
+		}
+	}
 	return output;
 }
 string nrz_i(string data)
 {
-	string output = "nrz_i";
+	string output;
+	for(int i =0; i < data.length();i++)
+	{
+		if(data[i] == '1')
+		{
+			output += "";
+		}
+		else if(data[i] == '0')
+		{
+			output += "";
+		}
+	}
 	return output;
 }
 string b_ami(string data)
@@ -18,6 +40,7 @@ string b_ami(string data)
 string manchester(string data)
 {
 	string output = "manchester";
+
 	return output;
 }
 string d_Manchester(string data)
