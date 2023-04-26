@@ -19,39 +19,39 @@ string nrz_l(string data)
 string nrz_i(string data)
 {
 	string output;
-	string last_it;
+	string last_itr;
 	for(int i =0; i < data.length();i++)
 	{
 		if(i == 0){
 			if(data[i] == '1')
 			{
 				output += "|+V|";
-				last_it = "|+V|";
+				last_itr = "|+V|";
 			}
 			else if(data[i] == '0')
 			{
 				output += "|-V|";
-				last_it = "|-V|";
+				last_itr = "|-V|";
 			}
 		}
 		else
 		{
 			if(data[i] == '1')
 			{
-				if(last_it == "|-V|")
+				if(last_itr == "|-V|")
 				{
 					output += "|+V|";
-					last_it = "|+V|";
+					last_itr = "|+V|";
 				}
 				else
 				{
 					output += "|-V|";
-					last_it = "|-V|";
+					last_itr = "|-V|";
 				}
 			}
 			else if(data[i] == '0')
 			{
-				output += last_it;
+				output += last_itr;
 			}
 		}
 	}
@@ -59,19 +59,65 @@ string nrz_i(string data)
 }
 string b_ami(string data)
 {
-	string output = "b_ami";
+	string output;
+	string last_onebit_transition;
+	for(int i =0; i < data.length();i++)
+	{
+		
+		if(i == 0)
+		{
+			if(data[i] == '1')
+			{
+				output += "|-V|";    //starting bit could be either positive or negative(+V , -V )
+				last_onebit_transition = "|-V|";
+			}
+			else if(data[i] == '0')
+			{
+				output += "|0V|"; //if starting bit is zero, that is zero voltage
+				
+			}
+		}
+		else
+		{
+			if(data[i] == '1')
+			{
+				if(last_onebit_transition == "|+V|")
+				{
+					output += "|-V|";
+					last_onebit_transition = "|-V|";
+				}
+				else if(last_onebit_transition == "|-V|")
+				{
+					output += "|+V|";
+					last_onebit_transition = "|+V|";
+				}
+			}
+			else if(data[i] == '0')
+			{
+				output += "|0V|";
+			}
+		}
+	}
 	return output;
 }
 string manchester(string data)
 {
-	string output = "manchester";
-
+	string output;
+		for (int i = 0; i < data.length(); i++)
+		{
+			if (data[i] == '1') {
+				output += "|-V +V|";
+			}
+			else if (data[i] == '0') {
+					output += "|+V -V|";
+			}
+		}
 	return output;
 }
 string d_Manchester(string data)
 {
 
-	string output = "d_manchester";
+	string output;
 	return output;
 
 }
