@@ -23,15 +23,15 @@ string nrz_i(string data) //nonreturn to zero inverted
 	for(int i =0; i < data.length();i++)
 	{
 		if(i == 0){ //starting bit
-			if(data[i] == '1')//let first bit be positive for input "1"
-			{
-				output += "|+V";
-				lastbit = "|+V";
-			}
-			else if(data[i] == '0')//negative for input "0"
+			if(data[i] == '1')//let first bit be negative for input "1"
 			{
 				output += "|-V";
 				lastbit = "|-V";
+			}
+			else if(data[i] == '0')//positive for input "0"
+			{
+				output += "|+V";
+				lastbit = "|+V";
 			}
 		}
 		else//rest of bit signals
@@ -122,13 +122,13 @@ string d_Manchester(string data) //differential manchester technique
     for (int i = 0; i < data.length(); i++)
     {
         if (i == 0) { //first bit
-            if (data[i] == '1') { //if first bit is equal to 1, then output +V -V (high to low) and save to lastbit
-                output += "|+V -V";
-                lastbit = "|+V -V";
-            }
-            else if (data[i] == '0') { //if first bit is equal to 0, then output -V +V (low to high) and save to lastbit
+            if (data[i] == '1') { //if first bit is equal to 1, then output -V +V (low to high) and save to lastbit
                 output += "|-V +V";
                 lastbit = "|-V +V";
+            }
+            else if (data[i] == '0') { //if first bit is equal to 0, then output +V -V (high to low) and save to lastbit
+                output += "|+V -V";
+                lastbit = "|+V -V";
             }
         }
         else { //rest of bits
