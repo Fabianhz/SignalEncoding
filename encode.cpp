@@ -3,22 +3,23 @@
 #include <fstream>
 #include <assert.h>
 
-
 #include "schemes.h"
 
 
 using namespace std;
-//compile program: g++ encode.cpp schemes.cpp -o encode
-//Program is executed as: ./encode INPUTDATA.txt schemecode
-//Schemecode: NRZ-L = 0 ; NRZ-I = 1; B-AMI = 2; Manchester = 3; D-Manchester = 4;
-
+/*compile program:
+g++ encode.cpp schemes.cpp -o encode
+Program is executed as: 
+./encode inputdata.txt schemecode
+Schemecode: NRZ-L = 0 ; NRZ-I = 1; B-AMI = 2; Manchester = 3; D-Manchester = 4;
+*/
 int main(int argc, char *argv[])
 {
 	//Declaration of variables
-	int code;
-	string data;
-	ifstream inputfile;
-	ofstream outfile;
+	int code; //save scheme code from user argument
+	string data; //save input data from inputdata.txt
+	ifstream inputfile; //input file
+	ofstream outfile;// output file
 	
 	inputfile.open(argv[1]);
 	assert(inputfile.is_open());
