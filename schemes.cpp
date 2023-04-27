@@ -5,7 +5,7 @@ string nrz_l(string data) // nonreturn to zero level
 	string output;
 	for(int i =0; i < data.length();i++)
 	{	//either positive or negative can be set for "1" input as long as "0" input has opposite polarity
-		if(data[i] == '1') 
+		if(data[i] == '1') //there is no transition stays constant unless input bit changes
 		{
 			output += "|-V";
 		}

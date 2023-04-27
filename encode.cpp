@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	
 	code = stoi(argv[2]);
 	
-	outfile.open("OutputSignal.txt"); //create output file
+	outfile.open("Outputfile.txt"); //create output file
 	assert(outfile.is_open());
 	outfile << "Input: " << data << endl;
 	
