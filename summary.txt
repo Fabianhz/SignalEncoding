@@ -1,0 +1,16 @@
+The purpose of this program is to enocode any digital data into digital signals. The coding schemes implemented in this program are: Nonretun to Zero-Level 
+(NRZ-L), Nonreturn to Zero Inverted (NRZ-I), Multilevel Binary Bipolar-AMI, Manchester,and Differential Macnhester. 
+
+NRZ-L and NRZ-I are somewhat similar to unipolar NRZ scheme but here we use two levels of amplitude (voltages). For NRZ-L(NRZ-Level), the level of the voltage 
+determines the value of the bit, typically binary 1 maps to logic-level high, and binary 0 maps to logic-level low, and for NRZ-I(NRZ-Invert), two-level signal has
+a transition at a boundary if the next bit that we are going to transmit is a logical 1, and does not have a transition if the next bit that we are going to transmit
+is a logical 0.
+
+Manchester encoding is somewhat combination of the RZ (transition at the middle of the bit) and NRZ-L schemes. The duration of the bit is divided into two halves. 
+The voltage remains at one level during the first half and moves to the other level in the second half. The transition at the middle of the bit provides synchronization.
+Differential Manchester is somewhat combination of the RZ and NRZ-I schemes. There is always a transition at the middle of the bit but the bit values are determined at
+the beginning of the bit. If the next bit is 0, there is a transition, if the next bit is 1, there is no transition.
+
+To run the program the user must specify the name of the data file in the first parameter and the code reperesenting the coding scheme in the second parameter. Once
+the user has chosen its preferred coding scheme, an ouput file should be created containting the new signal. The signal should be in terms of -V, +V, and 0V. Where "-V" 
+represents negative voltage, "+V" positve voltage, and no voltage "0V". 
